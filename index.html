@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shonos - Software Personalizado</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #0f172a 100%);
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .logo-emoji {
+            font-size: 2rem;
+        }
+
+        .logo-text {
+            color: #60a5fa;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #d1d5db;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #60a5fa;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #60a5fa, #22d3ee);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #d1d5db;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+            transform: scale(1.05);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .about-card {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 1rem;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .about-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #60a5fa;
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .service-card {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 1rem;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .service-card:hover {
+            border-color: rgba(59, 130, 246, 0.5);
+            transform: translateY(-5px);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            color: #9ca3af;
+            line-height: 1.6;
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: start;
+            gap: 1rem;
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+        }
+
+        .contact-form {
+            background: rgba(15, 23, 42, 0.5);
+            padding: 2rem;
+            border-radius: 1rem;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(71, 85, 105, 1);
+            border-radius: 0.5rem;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Chatbot */
+        .chat-button {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: #2563eb;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.5);
+            transition: all 0.3s;
+            z-index: 999;
+        }
+
+        .chat-button:hover {
+            transform: scale(1.1);
+            background: #1d4ed8;
+        }
+
+        .chat-window {
+            position: fixed;
+            bottom: 6rem;
+            right: 2rem;
+            width: 380px;
+            height: 500px;
+            background: #1e293b;
+            border-radius: 1rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            display: none;
+            flex-direction: column;
+            z-index: 999;
+        }
+
+        .chat-window.active {
+            display: flex;
+        }
+
+        .chat-header {
+            background: linear-gradient(to right, #2563eb, #06b6d4);
+            padding: 1rem;
+            border-radius: 1rem 1rem 0 0;
+        }
+
+        .chat-header h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .chat-header p {
+            font-size: 0.875rem;
+            color: #dbeafe;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .message {
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+
+        .message.bot {
+            background: rgba(71, 85, 105, 0.5);
+            align-self: flex-start;
+        }
+
+        .message.user {
+            background: #2563eb;
+            align-self: flex-end;
+        }
+
+        .chat-input-container {
+            padding: 1rem;
+            border-top: 1px solid rgba(71, 85, 105, 0.5);
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 0.75rem;
+            background: rgba(71, 85, 105, 0.5);
+            border: 1px solid rgba(71, 85, 105, 0.5);
+            border-radius: 0.5rem;
+            color: white;
+        }
+
+        .chat-input:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        .chat-send {
+            padding: 0.75rem 1rem;
+            background: #2563eb;
+            border: none;
+            border-radius: 0.5rem;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .chat-send:hover {
+            background: #1d4ed8;
+        }
+
+        /* Footer */
+        footer {
+            background: #0f172a;
+            border-top: 1px solid rgba(59, 130, 246, 0.2);
+            padding: 2rem;
+            text-align: center;
+            color: #9ca3af;
+        }
+
+        /* Mobile Menu */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .chat-window {
+                width: calc(100vw - 2rem);
+                right: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-emoji">💻</span>
+                <span>Shonos</span>
+                <span class="logo-text">Software.Personalizado</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#nosotros">Nosotros</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+            <button class="menu-toggle">☰</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <h1>
+            Transformamos tus ideas en
+            <span class="gradient-text">soluciones digitales</span>
+        </h1>
+        <p>Desarrollo de software personalizado con tecnología de vanguardia para impulsar tu negocio</p>
+        <button class="btn-primary" onclick="document.getElementById('contacto').scrollIntoView({behavior: 'smooth'})">
+            Solicitar Cotización
+        </button>
+    </section>
+
+    <!-- About Section -->
+    <section id="nosotros">
+        <h2 class="section-title">Sobre Nosotros</h2>
+        <div class="about-grid">
+            <div class="about-card">
+                <h3>🎯 Nuestra Misión</h3>
+                <p>
+                    Transformar ideas en soluciones digitales excepcionales. Nos especializamos en el desarrollo de sitios web y aplicaciones que potencian el crecimiento de nuestros clientes, utilizando tecnología innovadora, metodologías ágiles y un enfoque centrado en la experiencia del usuario. 
+                </p>
+            </div>
+            <div class="about-card">
+                <h3>🚀 Nuestra Visión</h3>
+                <p>
+                    Convertirnos en líderes en desarrollo de software personalizado en la región, reconocidos por 
+                    nuestra excelencia técnica, innovación constante y compromiso con la transformación digital de 
+                    empresas de todos los tamaños.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicios">
+        <h2 class="section-title">Nuestros Servicios</h2>
+        <p style="text-align: center; color: #9ca3af; margin-bottom: 3rem;">
+            Soluciones tecnológicas a medida para tu negocio
+        </p>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🌐</div>
+                <h3>Aplicaciones Web</h3>
+                <p>Desarrollo de aplicaciones web modernas, escalables y responsive con las últimas tecnologías.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📱</div>
+                <h3>Apps Móviles</h3>
+                <p>Aplicaciones nativas y multiplataforma para iOS y Android con experiencia de usuario excepcional.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">💾</div>
+                <h3>Sistemas Personalizados</h3>
+                <p>Desarrollo de sistemas a medida: ERP, CRM, gestión administrativa y más.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">⚙️</div>
+                <h3>Consultoría IT</h3>
+                <p>Asesoramiento técnico, auditorías de código y optimización de sistemas existentes.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contacto">
+        <h2 class="section-title">Contáctanos</h2>
+        <p style="text-align: center; color: #9ca3af; margin-bottom: 3rem;">
+            Estamos listos para hacer realidad tu proyecto
+        </p>
+        <div class="contact-grid">
+            <div class="contact-info">
+                <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem;">Información de Contacto</h3>
+                <div class="contact-item">
+                    <span class="contact-icon">📧</span>
+                    <div>
+                        <p style="color: #9ca3af;">Email</p>
+                        <p style="font-weight: 600;">jessicarivmor@gmail.com</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">📞</span>
+                    <div>
+                        <p style="color: #9ca3af;">Teléfono</p>
+                        <p style="font-weight: 600;">+591 76067046</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">📍</span>
+                    <div>
+                        <p style="color: #9ca3af;">Ubicación</p>
+                        <p style="font-weight: 600;">Santa Cruz, Bolivia</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <h3 style="font-size: 1.25rem; margin-bottom: 1.5rem;">Envíanos un mensaje</h3>
+                <div class="form-group">
+                    <input type="text" id="nombre" placeholder="Nombre" />
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" placeholder="Email" />
+                </div>
+                <div class="form-group">
+                    <textarea id="mensaje" placeholder="Cuéntanos sobre tu proyecto"></textarea>
+                </div>
+                <button class="btn-primary" style="width: 100%;" onclick="enviarMensaje()">
+                    Enviar Mensaje
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Shonos Software Personalizado. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Chatbot Button -->
+    <button class="chat-button" onclick="toggleChat()">💬</button>
+
+    <!-- Chatbot Window -->
+    <div class="chat-window" id="chatWindow">
+        <div class="chat-header">
+            <h3>Asistente Virtual Shonos</h3>
+            <p>¿En qué podemos ayudarte?</p>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="message bot">
+                ¡Hola! Soy el asistente virtual de Shonos. ¿En qué puedo ayudarte hoy?
+            </div>
+        </div>
+        <div class="chat-input-container">
+            <input 
+                type="text" 
+                class="chat-input" 
+                id="chatInput" 
+                placeholder="Escribe tu mensaje..."
+                onkeypress="if(event.key === 'Enter') sendMessage()"
+            />
+            <button class="chat-send" onclick="sendMessage()">➤</button>
+        </div>
+    </div>
+
+    <script>
+        // ⚙️ CONFIGURA AQUÍ TU ENDPOINT DE FORMSPREE
+        const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mzzynayk';  // Reemplaza con tu endpoint de Formspree
+
+        function toggleChat() {
+            const chatWindow = document.getElementById('chatWindow');
+            chatWindow.classList.toggle('active');
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+
+            const messagesContainer = document.getElementById('chatMessages');
+            
+            // Agregar mensaje del usuario
+            const userMsg = document.createElement('div');
+            userMsg.className = 'message user';
+            userMsg.textContent = message;
+            messagesContainer.appendChild(userMsg);
+            
+            input.value = '';
+            
+            // Scroll al final
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            
+            // Respuesta del bot
+            setTimeout(() => {
+                const botMsg = document.createElement('div');
+                botMsg.className = 'message bot';
+                botMsg.textContent = getBotResponse(message.toLowerCase());
+                messagesContainer.appendChild(botMsg);
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            }, 500);
+        }
+
+        function getBotResponse(message) {
+            if (message.includes('servicio') || message.includes('hacen') || message.includes('ofrecen')) {
+                return 'En Shonos ofrecemos desarrollo de aplicaciones web, móviles, sistemas personalizados y consultoría tecnológica. ¿Te interesa algún servicio en particular?';
+            } else if (message.includes('precio') || message.includes('costo') || message.includes('cuanto')) {
+                return 'Nuestros precios varían según el proyecto. Para un presupuesto personalizado, contáctanos a: contacto@shonos.com';
+            } else if (message.includes('contacto') || message.includes('correo') || message.includes('email')) {
+                return 'Puedes contactarnos por:\n📧 Email: contacto@shonos.com\n📱 WhatsApp: +591 XXXXXXXX\n\n¿Necesitas algo más?';
+            } else if (message.includes('tiempo') || message.includes('demora')) {
+                return 'El tiempo de desarrollo depende del proyecto. Proyectos simples: 2-4 semanas. Proyectos complejos: 2-6 meses.';
+            } else if (message.includes('hola') || message.includes('buenos') || message.includes('buenas')) {
+                return '¡Hola! 👋 Bienvenido a Shonos Software Personalizado. ¿En qué puedo ayudarte hoy?';
+            } else {
+                return 'Gracias por tu mensaje. Para información más detallada, contáctanos a: contacto@shonos.com o +591 XXXXXXXX';
+            }
+        }
+
+        async function enviarMensaje() {
+            const nombre = document.getElementById('nombre').value;
+            const email = document.getElementById('email').value;
+            const mensaje = document.getElementById('mensaje').value;
+            const btn = event.target;
+            
+            // Validar campos
+            if (!nombre || !email || !mensaje) {
+                alert('Por favor completa todos los campos');
+                return;
+            }
+
+            // Validar email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Por favor ingresa un email válido');
+                return;
+            }
+            
+            // Deshabilitar botón y mostrar loading
+            btn.disabled = true;
+            const textoOriginal = btn.textContent;
+            btn.textContent = 'Enviando...';
+            
+            try {
+                // Enviar datos a Formspree
+                const response = await fetch(FORMSPREE_ENDPOINT, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        nombre: nombre,
+                        email: email,
+                        mensaje: mensaje,
+                        _subject: `Nuevo mensaje de ${nombre} - Shonos Web`
+                    })
+                });
+
+                if (response.ok) {
+                    // Éxito
+                    alert('¡Mensaje enviado exitosamente! ✅\n\nNos pondremos en contacto contigo pronto.');
+                    
+                    // Limpiar formulario
+                    document.getElementById('nombre').value = '';
+                    document.getElementById('email').value = '';
+                    document.getElementById('mensaje').value = '';
+                } else {
+                    // Error del servidor
+                    throw new Error('Error en el servidor');
+                }
+            } catch (error) {
+                console.error('Error al enviar:', error);
+                alert('❌ Hubo un error al enviar el mensaje.\n\nPor favor intenta nuevamente o contáctanos directamente a:\ncontacto@shonos.com');
+            } finally {
+                // Restaurar botón
+                btn.disabled = false;
+                btn.textContent = textoOriginal;
+            }
+        }
+    </script>
+</body>
+</html>
